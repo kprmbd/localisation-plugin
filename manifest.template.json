@@ -1,0 +1,15 @@
+{
+  "name": "Lifesum Localise",
+  "id": "lifesum-localise",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": [
+      "__COPYSTUDIO_ORIGIN__",
+      "__PROXY_ORIGIN__"
+    ],
+    "reasoning": "The Copy Studio endpoint performs AI translation and localisation-key generation in Lifesum's tone of voice, authenticated with a Copy Studio token the user pastes into Settings. The workers.dev endpoint is our own Cloudflare Worker, used solely to read Lokalise keys and translations with a read-only Lokalise token the user pastes into Settings: api.lokalise.com cannot be called directly because it does not answer CORS preflights for the plugin's null origin, so the worker forwards those requests and adds the CORS headers. The worker stores no credentials."
+  }
+}

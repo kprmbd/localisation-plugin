@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output. Regenerate with `npm run build` — the bundles embed the
+# endpoints and proxy key from config.local.json, so they must never be
+# committed.
+dist/
+
+# Generated from manifest.template.json at build time; contains the real
+# endpoint hostnames.
+manifest.json
+
+# Local configuration: endpoints + proxy key. Start from config.example.json.
+config.local.json
+
+# Real worker config, including the Lokalise project allowlist.
+# Start from worker/wrangler.example.toml.
+worker/wrangler.toml
+.dev.vars
+
+# Local agent/editor settings
+.claude/
+.vscode/
+.idea/
+
+# OS noise
+.DS_Store

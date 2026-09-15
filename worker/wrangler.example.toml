@@ -1,0 +1,24 @@
+name = "YOUR-WORKER-NAME"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+# CORS proxy + access gate for api.lokalise.com. No KV, no cron, one secret.
+#
+# Copy Studio is not proxied here: the plugin calls the Copy Studio MCP
+# endpoint directly with a token pasted into plugin Settings.
+#
+# Deploy:
+#   npx wrangler secret put PROXY_KEY     # must match proxyKey in config.local.json
+#   npx wrangler deploy
+#
+# The worker fails closed (503) until BOTH the secret and the project allowlist
+# below are set — an unconfigured deploy would be an open relay to Lokalise.
+
+[vars]
+# Comma-separated Lokalise project IDs the proxy will serve. A token that can't
+# see at least one of these is rejected, which is what stops anyone who
+# extracts PROXY_KEY from the plugin bundle from using this endpoint.
+# Branches are matched on the base id, so "1234abcd" covers "1234abcd:staging".
+# Find it in the Lokalise project URL, or:
+#   curl -s -H "X-Api-Token: <token>" https://api.lokalise.com/api2/projects
+ALLOWED_PROJECT_IDS = "PROJECT_ID_ONE,PROJECT_ID_TWO"

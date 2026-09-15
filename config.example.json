@@ -1,0 +1,5 @@
+{
+  "proxyOrigin": "https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev",
+  "proxyKey": "YOUR_PROXY_KEY",
+  "copyStudioMcpUrl": "https://YOUR-COPY-STUDIO-HOST/mcp"
+}
