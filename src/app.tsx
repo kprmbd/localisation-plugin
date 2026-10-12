@@ -5,6 +5,7 @@ import { CHANNELS, LANG_CODES, LANGUAGES } from './lib/tov';
 import { translate, generateKeysFor, testConnection } from './lib/copystudio';
 import { getAllKeyTranslations, getProjectLanguages } from './lib/localise';
 import { download, toCsv, type Row } from './lib/csv';
+import { DEFAULT_COPYSTUDIO_TOKEN, DEFAULT_LOKALISE_TOKEN } from './config';
 import { ui } from './ui-kit';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -234,9 +235,11 @@ export default function App() {
       if (!msg) return;
       switch (msg.t) {
         case 'settings': {
+          // A token saved in Settings wins; otherwise fall back to the one
+          // built in from config.local.json (if any).
           const s: Settings = {
-            copyStudioToken: msg.settings.copyStudioToken ?? '',
-            localiseKey: msg.settings.localiseKey ?? '',
+            copyStudioToken: msg.settings.copyStudioToken || DEFAULT_COPYSTUDIO_TOKEN,
+            localiseKey: msg.settings.localiseKey || DEFAULT_LOKALISE_TOKEN,
           };
           setSettings(s);
           setSettingsLoaded(true);

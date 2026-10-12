@@ -36,6 +36,12 @@ Fill in the three values in `config.local.json`:
 | `proxyOrigin` | The deployed Cloudflare Worker's URL, e.g. `https://<name>.<subdomain>.workers.dev` |
 | `proxyKey` | The `PROXY_KEY` secret set on that Worker via `wrangler secret put` |
 | `copyStudioMcpUrl` | The Copy Studio MCP endpoint, ending in `/mcp` |
+| `lokaliseToken` | *Optional.* Lokalise API token to pre-fill Settings |
+| `copyStudioToken` | *Optional.* Copy Studio access token to pre-fill Settings |
+
+The two token fields can stay empty, in which case the plugin asks for them in
+Settings. If you fill them in, they are compiled into `dist/` — anyone you give
+that build to can extract them and will be using your tokens.
 
 Then build:
 
@@ -51,7 +57,8 @@ embed the values above.
 Figma → Plugins → Development → **Import plugin from manifest…** → pick the
 generated `manifest.json` in this directory.
 
-The plugin needs two tokens, pasted into its **Settings** tab on first run:
+Unless they were set in `config.local.json`, the plugin needs two tokens,
+pasted into its **Settings** tab on first run:
 
 - A **Lokalise API token** (read-only is enough)
 - A **Copy Studio access token**

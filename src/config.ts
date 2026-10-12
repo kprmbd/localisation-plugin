@@ -12,6 +12,8 @@
 declare const __CFG_PROXY_ORIGIN__: string;
 declare const __CFG_PROXY_KEY__: string;
 declare const __CFG_COPYSTUDIO_MCP_URL__: string;
+declare const __CFG_LOKALISE_TOKEN__: string;
+declare const __CFG_COPYSTUDIO_TOKEN__: string;
 
 // Origin of our Cloudflare Worker, which CORS-proxies api.lokalise.com.
 export const PROXY_ORIGIN = __CFG_PROXY_ORIGIN__;
@@ -25,3 +27,9 @@ export const PROXY_KEY = __CFG_PROXY_KEY__;
 
 // Copy Studio MCP endpoint — translation and localisation-key generation.
 export const COPYSTUDIO_MCP_URL = __CFG_COPYSTUDIO_MCP_URL__;
+
+// Optional default tokens, used when Settings has none saved. They ship inside
+// the bundle, so anyone with this build can extract them — only set them for
+// builds that stay with people allowed to use these tokens. Empty = not set.
+export const DEFAULT_LOKALISE_TOKEN = __CFG_LOKALISE_TOKEN__;
+export const DEFAULT_COPYSTUDIO_TOKEN = __CFG_COPYSTUDIO_TOKEN__;

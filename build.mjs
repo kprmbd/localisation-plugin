@@ -26,11 +26,18 @@ for (const field of ['proxyOrigin', 'proxyKey', 'copyStudioMcpUrl']) {
   }
 }
 
+// Optional default tokens. When set, they pre-fill Settings so nobody has to
+// paste them on first run. Empty or placeholder values mean "ask in Settings".
+const optionalToken = (v) =>
+  typeof v === 'string' && !v.includes('YOUR-') && !v.includes('YOUR_') ? v.trim() : '';
+
 // Compiled into the bundle in place of the constants declared in src/config.ts.
 const configDefine = {
   __CFG_PROXY_ORIGIN__: JSON.stringify(cfg.proxyOrigin),
   __CFG_PROXY_KEY__: JSON.stringify(cfg.proxyKey),
   __CFG_COPYSTUDIO_MCP_URL__: JSON.stringify(cfg.copyStudioMcpUrl),
+  __CFG_LOKALISE_TOKEN__: JSON.stringify(optionalToken(cfg.lokaliseToken)),
+  __CFG_COPYSTUDIO_TOKEN__: JSON.stringify(optionalToken(cfg.copyStudioToken)),
 };
 
 // manifest.json is generated, not committed, so its networkAccess allowlist can
