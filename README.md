@@ -1,26 +1,7 @@
-# Lifesum Localise
+# Figma localisation plugin
 
 A Figma plugin for localising copy in designs. It reads text from the current
-frame, looks up existing keys and translations in Lokalise, and uses Copy Studio
-to translate new strings and generate localisation keys in Lifesum's tone of
-voice.
-
-## How it fits together
-
-```
-Figma plugin  ──►  Copy Studio MCP        translation + key generation
-              └─►  Cloudflare Worker  ──►  api.lokalise.com   (CORS proxy, read-only)
-```
-
-Two things to know about the architecture:
-
-- **Copy Studio owns the brand voice.** Translation and key generation run
-  server-side, so no tone-of-voice prompt and no LLM API key exist in this repo.
-- **Lokalise must go through the Worker.** `api.lokalise.com` answers CORS
-  preflights for the plugin's null origin with a 404, so direct calls always
-  fail with `Failed to fetch`. The Worker forwards the request and adds the CORS
-  headers. Figma's `networkAccess` allowlist does not exempt the plugin from
-  CORS — routing through it does not help.
+frame, looks up existing keys and translations in Lokalise, and translates the new strings and generate localisation keys.
 
 ## Setup on a new machine
 
